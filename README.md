@@ -1,6 +1,11 @@
-# tls_inspector
+<h1 align="center">tls_inspector</h1>
 
-[![pub](https://img.shields.io/pub/v/tls_inspector)](https://pub.dev/packages/tls_inspector) [![points](https://img.shields.io/pub/points/tls_inspector)](https://pub.dev/packages/tls_inspector/score) [![CI](https://github.com/Seungpyo1007/tls_inspector/actions/workflows/ci.yml/badge.svg)](https://github.com/Seungpyo1007/tls_inspector/actions/workflows/ci.yml)
+<p align="center">
+  <a href="https://pub.dev/packages/tls_inspector"><img src="https://img.shields.io/pub/v/tls_inspector" alt="pub version"></a>
+  <a href="https://pub.dev/packages/tls_inspector/score"><img src="https://img.shields.io/pub/points/tls_inspector" alt="pub points"></a>
+  <a href="https://github.com/Seungpyo1007/tls_inspector/actions/workflows/ci.yml"><img src="https://github.com/Seungpyo1007/tls_inspector/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/Seungpyo1007/tls_inspector/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license"></a>
+</p>
 
 See the TLS certificate a server actually presents: who issued it, when it
 expires, which names it covers, and whether your platform trusts it. Useful
