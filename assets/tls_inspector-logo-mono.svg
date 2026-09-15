@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">tls_inspector monochrome logo</title>
+  <desc id="desc">A single-color outlined padlock with an overlapping magnifying glass, representing TLS certificate inspection.</desc>
+
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M178 218v-34c0-49 31-83 78-83s78 34 78 83v34"
+          stroke-width="18"/>
+    <rect x="140" y="202" width="222" height="188" rx="38"
+          stroke-width="18"/>
+    <circle cx="251" cy="284" r="12" fill="currentColor" stroke="none"/>
+    <path d="M251 296v32" stroke-width="16"/>
+    <circle cx="344" cy="345" r="72" stroke-width="18"/>
+    <path d="M393 398 438 443" stroke-width="18"/>
+  </g>
+</svg>
