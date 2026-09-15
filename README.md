@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Seungpyo1007/tls_inspector/main/assets/tls_inspector-logo.png" alt="tls_inspector logo: a padlock with a magnifying glass" width="128">
+</p>
+
 <h1 align="center">tls_inspector</h1>
 
 <p align="center">

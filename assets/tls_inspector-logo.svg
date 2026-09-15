@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">tls_inspector logo</title>
+  <desc id="desc">A purple rounded square containing a cream padlock and an overlapping magnifying glass, representing TLS certificate inspection.</desc>
+
+  <rect x="12" y="12" width="488" height="488" rx="126" fill="#7A5AF0"/>
+
+  <!-- Padlock shackle -->
+  <path d="M178 218v-34c0-49 31-83 78-83s78 34 78 83v34"
+        fill="none"
+        stroke="#33207A"
+        stroke-width="18"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- Padlock body -->
+  <rect x="140" y="202" width="222" height="188" rx="38" fill="#FFF9F3"/>
+
+  <!-- Keyhole -->
+  <circle cx="251" cy="284" r="14" fill="#33207A"/>
+  <path d="M251 296v34"
+        fill="none"
+        stroke="#33207A"
+        stroke-width="16"
+        stroke-linecap="round"/>
+
+  <!-- Magnifying glass -->
+  <circle cx="344" cy="345" r="72"
+          fill="#FFF9F3"
+          stroke="#33207A"
+          stroke-width="10"/>
+  <path d="M393 398 438 443"
+        fill="none"
+        stroke="#33207A"
+        stroke-width="18"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+</svg>
