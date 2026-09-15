@@ -16,6 +16,7 @@ Future<void> main(List<String> args) async {
         ' (${certificate.daysUntilExpiry()} days)',
       );
       print('  names:   ${certificate.subjectAltNames.join(', ')}');
+      print('  covers $host: ${certificate.coversHost(host)}');
       print('  sha1:    ${certificate.sha1Fingerprint}');
     } on TlsInspectException catch (error) {
       print('$host: ${error.code}: $error');

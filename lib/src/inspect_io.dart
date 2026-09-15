@@ -91,5 +91,6 @@ Future<TlsCertificateInfo> inspectTls(
         .join(':'),
     trusted: trusted,
     pem: certificate.pem,
+    der: certificate.der,
   );
 }

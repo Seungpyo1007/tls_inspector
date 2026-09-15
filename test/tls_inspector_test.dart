@@ -86,6 +86,8 @@ void main() {
         matches(RegExp(r'^([0-9A-F]{2}:){19}[0-9A-F]{2}$')),
       );
       expect(info.pem, contains('BEGIN CERTIFICATE'));
+      expect(info.der, _der('cert.pem'));
+      expect(info.coversHost('127.0.0.1'), isTrue);
     });
 
     test('maps a refused connection to connect_failed', () async {
@@ -139,6 +141,33 @@ void main() {
       expect(() => inspectTls('example.com', port: 0), throwsRangeError);
       expect(() => inspectTls('example.com', port: 65536), throwsRangeError);
     });
+  });
+
+  test('matches hosts against subject alternative names', () {
+    TlsCertificateInfo covering(List<String> names) => TlsCertificateInfo(
+      host: 'badssl.com',
+      port: 443,
+      subject: '/CN=*.badssl.com',
+      issuer: '/CN=Example CA',
+      notBefore: DateTime.utc(2026),
+      notAfter: DateTime.utc(2027),
+      subjectAltNames: names,
+      sha1Fingerprint: '',
+      trusted: true,
+      pem: '',
+    );
+    final info = covering(['*.badssl.com', 'badssl.com', '127.0.0.1', '*.com']);
+
+    expect(info.coversHost('badssl.com'), isTrue);
+    expect(info.coversHost('A.BadSSL.com.'), isTrue);
+    expect(info.coversHost('a.b.badssl.com'), isFalse);
+    expect(info.coversHost('wrong.host.badssl.com'), isFalse);
+    expect(info.coversHost('example.com'), isFalse);
+    expect(info.coversHost('127.0.0.1'), isTrue);
+    expect(info.coversHost('127.0.0.2'), isFalse);
+    expect(info.coversHost(' '), isFalse);
+    expect(covering([]).coversHost('badssl.com'), isFalse);
+    expect(info.der, isEmpty);
   });
 
   test('computes days until expiry and expiry state', () {

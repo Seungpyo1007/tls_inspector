@@ -1,5 +1,7 @@
 # tls_inspector
 
+[![pub](https://img.shields.io/pub/v/tls_inspector)](https://pub.dev/packages/tls_inspector) [![points](https://img.shields.io/pub/points/tls_inspector)](https://pub.dev/packages/tls_inspector/score) [![CI](https://github.com/Seungpyo1007/tls_inspector/actions/workflows/ci.yml/badge.svg)](https://github.com/Seungpyo1007/tls_inspector/actions/workflows/ci.yml)
+
 See the TLS certificate a server actually presents: who issued it, when it
 expires, which names it covers, and whether your platform trusts it. Useful
 for certificate expiry alerts, deployment checks, and debugging HTTPS errors.
@@ -33,13 +35,16 @@ access: the `INTERNET` permission on Android release builds and the
 - Subject alternative names (DNS names and IP addresses) parsed from the
   certificate, which `dart:io` does not expose.
 - Stable error codes: `timeout`, `connect_failed`, and `handshake_failed`.
+- `coversHost` checks a host name against the certificate's names, including
+  wildcards, so you can tell a name mismatch from an untrusted chain.
+- `der` holds the raw certificate for other fingerprints such as SHA-256.
 - No dependencies.
 
 ## Installation
 
 ```yaml
 dependencies:
-  tls_inspector: ^0.0.1
+  tls_inspector: ^0.0.2
 ```
 
 ## Usage
@@ -68,6 +73,23 @@ final der = base64.decode(
   pem.replaceAll(RegExp(r'-----[^-]+-----|\s'), ''),
 );
 print(parseSubjectAltNames(der));
+```
+
+Tell a name mismatch from an untrusted chain:
+
+```dart
+final certificate = await inspectTls('wrong.host.badssl.com');
+if (!certificate.trusted && !certificate.coversHost('wrong.host.badssl.com')) {
+  print('Issued for ${certificate.subjectAltNames}'); // [*.badssl.com, badssl.com]
+}
+```
+
+Compute a SHA-256 fingerprint with `package:crypto`:
+
+```dart
+import 'package:crypto/crypto.dart';
+
+print(sha256.convert(certificate.der));
 ```
 
 ## Limitations

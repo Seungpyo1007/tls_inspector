@@ -12,6 +12,7 @@ class TlsCertificateInfo {
     required this.sha1Fingerprint,
     required this.trusted,
     required this.pem,
+    this.der = const <int>[],
   });
 
   /// Host name or address that was connected to.
@@ -44,6 +45,10 @@ class TlsCertificateInfo {
   /// The certificate in PEM format.
   final String pem;
 
+  /// The DER-encoded certificate, for computing other fingerprints such as
+  /// SHA-256.
+  final List<int> der;
+
   /// Whole days left until [notAfter], rounded down so the value turns
   /// negative as soon as the certificate expires.
   int daysUntilExpiry({DateTime? now}) =>
@@ -53,7 +58,33 @@ class TlsCertificateInfo {
 
   /// Whether [notAfter] has passed.
   bool isExpired({DateTime? now}) => (now ?? DateTime.now()).isAfter(notAfter);
+
+  /// Whether [subjectAltNames] cover [host], ignoring case and a trailing dot.
+  ///
+  /// A wildcard such as `*.example.com` covers exactly one more label
+  /// (`a.example.com`, not `example.com` or `a.b.example.com`). IP addresses
+  /// must match exactly. Like modern clients, the subject common name is not
+  /// used.
+  bool coversHost(String host) {
+    final name = _canonical(host);
+    if (name.isEmpty) return false;
+    final isAddress = name.contains(':') || RegExp(r'^[\d.]+$').hasMatch(name);
+    for (final altName in subjectAltNames) {
+      final pattern = _canonical(altName);
+      if (pattern == name) return true;
+      // Wildcards need at least two labels after `*.`, so `*.com` covers
+      // nothing.
+      if (isAddress || !pattern.startsWith('*.')) continue;
+      if (!pattern.substring(2).contains('.')) continue;
+      final dot = name.indexOf('.');
+      if (dot > 0 && name.substring(dot) == pattern.substring(1)) return true;
+    }
+    return false;
+  }
 }
+
+String _canonical(String name) =>
+    name.trim().toLowerCase().replaceFirst(RegExp(r'\.$'), '');
 
 /// TLS inspection failure.
 class TlsInspectException implements Exception {

@@ -2,7 +2,7 @@ name: tls_inspector
 description: >-
   Inspect a server's TLS certificate: issuer, validity dates, days until
   expiry, subject alternative names, SHA-1 fingerprint, and trust status.
-version: 0.0.1
+version: 0.0.2
 homepage: https://seungpyo.online
 repository: https://github.com/Seungpyo1007/tls_inspector
 issue_tracker: https://github.com/Seungpyo1007/tls_inspector/issues
