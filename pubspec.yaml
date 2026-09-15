@@ -1,0 +1,33 @@
+name: tls_inspector
+description: >-
+  Inspect a server's TLS certificate: issuer, validity dates, days until
+  expiry, subject alternative names, SHA-1 fingerprint, and trust status.
+version: 0.0.1
+homepage: https://seungpyo.online
+repository: https://github.com/Seungpyo1007/tls_inspector
+issue_tracker: https://github.com/Seungpyo1007/tls_inspector/issues
+topics:
+  - tls
+  - ssl
+  - certificate
+  - security
+  - networking
+
+environment:
+  sdk: ^3.11.0
+
+# Browsers do not expose raw TLS connections, so inspectTls needs dart:io.
+platforms:
+  android:
+  ios:
+  linux:
+  macos:
+  windows:
+
+dev_dependencies:
+  lints: ^6.1.0
+  test: ^1.32.0
+
+# Throwaway key for the local TLS server in the tests; it protects nothing.
+false_secrets:
+  - /test/fixtures/key.pem
