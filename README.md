@@ -53,7 +53,7 @@ access: the `INTERNET` permission on Android release builds and the
 
 ```yaml
 dependencies:
-  tls_inspector: ^0.0.2
+  tls_inspector: ^0.0.3
 ```
 
 ## Usage
